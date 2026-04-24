@@ -1,0 +1,41 @@
+{
+  "name": "freetype",
+  "version": "2.14.3.0",
+  "schemaVersion": 2,
+  "kind": "DynamicLib",
+  "description": "Font rendering engine",
+  "dependencies": {
+    "zlib": "^1.3.0.0",
+    "libpng": "^1.6.58.0",
+    "bzip2": "0.0.0.0",
+    "brotli": "^1.2.0.0"
+  },
+  "options": {
+    "shared": {
+      "default": true,
+      "allowed": [true, false],
+      "description": "Build as shared library; set false for static"
+    }
+  },
+  "build": {
+    "system": "cmake",
+    "configs": [
+      "Debug",
+      "Release",
+      "RelWithDebInfo",
+      "MinSizeRel"
+    ],
+    "configure": [
+      "-DBUILD_SHARED_LIBS=${options.shared}",
+      "-DFT_DISABLE_HARFBUZZ=TRUE",
+      "-DFT_REQUIRE_ZLIB=TRUE",
+      "-DFT_REQUIRE_PNG=TRUE",
+      "-DFT_REQUIRE_BZIP2=TRUE",
+      "-DFT_REQUIRE_BROTLI=TRUE",
+      "-DCMAKE_DEBUG_POSTFIX=d",
+      "-DCMAKE_RELWITHDEBINFO_POSTFIX=rd",
+      "-DCMAKE_MINSIZEREL_POSTFIX=msr"
+    ],
+    "installDir": "install"
+  }
+}
